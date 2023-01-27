@@ -1,12 +1,14 @@
 /**
  * The Edge class holds an Edge object, which will store the weight of the edge and the two vertices that
  * connect it.
+ * @ author iva nakova
+ * @version 12 01 2023
  */
 
 public class Edge implements Comparable<Edge> {
     private Vertex v1;
     private Vertex v2;
-    public double w;
+    public double weight;
 
     /**
      * Class constructor specifying number of objects to create.
@@ -14,14 +16,14 @@ public class Edge implements Comparable<Edge> {
     public Edge(Vertex vert1, Vertex vert2, double weight) {
         this.v1 = vert1;
         this.v2 = vert2;
-        this.w = weight;
+        this.weight = weight;
     }
 
     /**
      * Returns the weight of the edge
      */
     public double getWeight() {
-        return w;
+        return weight;
     }
 
     /**
@@ -55,7 +57,7 @@ public class Edge implements Comparable<Edge> {
      */
     @Override
     public int compareTo(Edge other) {
-        double temp = w - other.w;
+        double temp = weight - other.weight;
         if (temp > 0) {
             temp = 1;
         } else if (temp < 0) {
@@ -70,7 +72,7 @@ public class Edge implements Comparable<Edge> {
      * @return a string containing the two vertices and the weight
      */
     public String toString() {
-        String s = "v1 = " + v1.city + ", v2 = " + v2.city + ", weight = " + w;
+        String s = "v1 = " + v1.city + ", v2 = " + v2.city + ", weight = " + weight;
         return s;
     }
 }

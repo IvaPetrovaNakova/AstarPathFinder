@@ -57,7 +57,13 @@ public class Navigator {
      * @param graph this is the graph created above.
      */
     public static void userInteraction(Graph graph) {
-        System.out.println("Welcome to navigator! Enter two cities you would like to see the path between. Press \"Enter\" to leave.");
+        System.out.println("Welcome to navigator! Enter two cities you would like to see the shortest path.\n" +
+                "This program read from scv.file, as well as .txt\n" +
+                "Available choices are:\n" +
+                " - Vidin-Vratsa-Montana-Pleven-VelikoTarnovo-Ruse-\n" +
+                " - Shumen-Dobrich-Varna-Sofia-Pernik-Bansko-Blagoevgrad-\n" +
+                " - Pazardhik-Plovdiv-Haskovo-Sliven-Burgas-\n" +
+                "Press \"Enter\" to leave.");
         Scanner scan = new Scanner(System.in);
         String userInput = "beepboop"; //initial (unimportant) value for userInput
         while (!userInput.equals("")) {

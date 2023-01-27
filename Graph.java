@@ -9,7 +9,7 @@ public class Graph {
     private Vertex[] vertices; //an array that holds every vertex in the graph
 
     /* in this hash map, the key is the city name, and the value is its location in the vertex array */
-    private HashMap<String, Integer> cities;
+    private HashMap<String, Integer> cities; //store the start and end destination only
 
     /**
      * Class constructor specifying number of objects to create.
@@ -93,7 +93,7 @@ public class Graph {
      */
     public double getScore(String v1) {
         int v = cities.get(v1);
-        return vertices[v].score;
+        return vertices[v].fCost;
     }
 
     /**
@@ -156,15 +156,15 @@ public class Graph {
     /**
      * A star method takes in two city names and calculates the shortest path between them.
      *
-     * @param v1 start vertex name
-     * @param v2 goal vertex name
+     * @param v1 start vertex name get the index from graph
+     * @param v2 goal vertex name get the index from graph
      * @return An arraylist of the path taken to connect the vertices
      */
     public ArrayList<Vertex> aStarConnection(String v1, String v2) {
         //gets the vertices from the list and calls a helper method
-        int ve1 = cities.get(v1);
-        int ve2 = cities.get(v2);
-        return aStarSearch(vertices[ve1], vertices[ve2]);
+        int startCityIndex = cities.get(v1);
+        int endCityIndex = cities.get(v2);
+        return aStarSearch(vertices[startCityIndex], vertices[endCityIndex]);
     }
 
     /**
@@ -175,59 +175,59 @@ public class Graph {
      * @param v2 goal vertex
      * @return An arraylist of the path taken to connect the vertices
      */
-    private ArrayList<Vertex> aStarSearch(Vertex start, Vertex end) {
+    private ArrayList<Vertex> aStarSearch(Vertex startCity, Vertex endCity) {
 
-        PriorityQueue<Vertex> next = new PriorityQueue<Vertex>(); //open list of vertices to explore
+        PriorityQueue<Vertex> openList = new PriorityQueue<Vertex>(); //initialise the open list of vertices to explore
 
-        //The hashtable stores vertices already explored as the key, with the value being the vertex that led to
+        //The hashtable stores vertices already visited as the key, with the value being the vertex that led to
         //that key
-        Hashtable<Vertex, Vertex> closed = new Hashtable<Vertex, Vertex>();
+        //TODO - check can I set PQ against this Hashtable
+        Hashtable<Vertex, Vertex> closedList = new Hashtable<Vertex, Vertex>();
         boolean reachGoal = false;
-        Vertex curr = start;
+        Vertex currentPosition = startCity;
 
         //loops through all vertices connected to the start vertex
-        for (int i = 0; i < start.edges.size(); i++) {
-            Edge e = start.edges.get(i);
-            Vertex v = e.getOther(start);
-            v.recalcScore(end); //calculates score
-            v.setPrev(start);  //sets previous vertex
-            next.add(v); //adds to priority queue
+        for (int i = 0; i < startCity.edges.size(); i++) {
+            Edge e = startCity.edges.get(i);
+            Vertex v = e.getOther(startCity);
+            v.criteriaFunction(endCity); //calculates score
+            v.setPrev(startCity);  //sets previous vertex
+            openList.add(v); //adds to priority queue
         }
 
-        closed.put(start, start); //puts the first vertex into the closed list
+        closedList.put(startCity, startCity); //puts the first vertex into the closed list
 
-        while (next.size() > 0 && !reachGoal) { //while the priority queue isn't empty and the goal hasn't been reached
-            curr = next.poll();  //take the next item from the priority queue
-            if (curr.city.equals(end.city)) { //if you've reached the goal
+        while (openList.size() > 0 && !reachGoal) { //while the priority queue isn't empty and the goal hasn't been reached
+            currentPosition = openList.poll();  //take the next item from the priority queue
+            if (currentPosition.city.equals(endCity.city)) { //if you've reached the goal
                 reachGoal = true;
-                closed.put(curr, curr.prev); //put on closed list in order to correctly trace back the path
-                curr.recalcScore(end); //get the final score
+                closedList.put(currentPosition, currentPosition.gCost); //put on closed list in order to correctly trace back the path
+                currentPosition.criteriaFunction(endCity); //get the final score
                 break;
             }
 
             //for every vertex connected to the current vertex
-            for (int i = 0; i < curr.edges.size(); i++) {
-                Edge e = curr.edges.get(i);
-                Vertex v = e.getOther(curr);
-                v.recalcScore(end);
+            for (int i = 0; i < currentPosition.edges.size(); i++) {
+                Edge e = currentPosition.edges.get(i);
+                Vertex v = e.getOther(currentPosition);
+                v.criteriaFunction(endCity);
                 //if it is not already in the priority queue and it hasn't been explored yet
-                if (!next.contains(v) && !closed.containsKey(v)) {
-                    v.setPrev(curr);
-                    next.add(v);
+                if (!openList.contains(v) && !closedList.containsKey(v)) {
+                    v.setPrev(currentPosition);
+                    openList.add(v);
                 }
             }
 
             //put current on the closed list
-            closed.put(curr, curr.prev);
+            closedList.put(currentPosition, currentPosition.gCost);
         }
 
         //if you haven't met your goal and the priority queue is empty, there is no path to connect the two.
         if (!reachGoal) {
             return null;
         }
-        return returnPath(closed, start, end);
+        return returnPath(closedList, startCity, endCity);
     }
-
 
     /**
      * The returnPath method retraces the path taken by a search and returns the final path. This method will
@@ -253,14 +253,14 @@ public class Graph {
     }
 
     /**
-     * The reset method resets values in the vertices between searches.
+     * This method resets values in the vertices between searches. By new input from console
      */
     public void reset() {
         //loops through every vertex
         for (int i = 0; i < numVertices; i++) {
-            vertices[i].score = 0;
-            vertices[i].gx = 0;
-            vertices[i].prev = null;
+            vertices[i].fCost = 0;
+            vertices[i].totalGCost = 0;
+            vertices[i].gCost = null;
         }
     }
 

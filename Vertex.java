@@ -4,6 +4,8 @@ import java.util.ArrayList;
  * The Vertex class holds a vertex object, which will hold the latitude and longitude of the vertex
  * along with the name of the city itself.
  *
+ * @ a
+ *
  * @param lat   the latitude
  * @param llong the longitude
  * @param name  the city name
@@ -17,9 +19,9 @@ public class Vertex implements Comparable<Vertex> {
     protected ArrayList<Edge> edges;
 
     //holds the score of the vertex when come across in a search
-    protected double score;
-    protected double gx; //holds the distance travelled to this vertex when come across in a search
-    protected Vertex prev; //the vertex that led to this vertex in a search
+    protected double fCost; //the total cost ot criterion function f(n) = g(n) + h(n)
+    protected double totalGCost; //holds the distance travelled to this vertex when come across in a search
+    protected Vertex gCost; //the vertex that hold the previously cost g(n)
     private final int R = 6371; //radius of earth
 
     /**
@@ -29,10 +31,10 @@ public class Vertex implements Comparable<Vertex> {
         this.latitude = latitude;
         this.longitude = longitude;
         this.edges = new ArrayList<Edge>();
-        this.score = 0;
-        this.gx = 0;
+        this.fCost = 0;
+        this.totalGCost = 0;
         this.city = name;
-        this.prev = null;
+        this.gCost = null;
     }
 
     /**
@@ -67,20 +69,20 @@ public class Vertex implements Comparable<Vertex> {
         double lonb = v.longitude * (Math.PI / 180);
 
         //uses distance formula to calculate the distance
-        double distance = Math.acos(Math.sin(lata) * Math.sin(latb) +
+        double hCost = Math.acos(Math.sin(lata) * Math.sin(latb) +
                 Math.cos(lata) * Math.cos(latb) * Math.cos(lona - lonb)) * R;
 
-        return distance;
+        return hCost;
     }
 
     /**
-     * The recalcScore method calculates the score that the current vertex has in a search by adding its
-     * distance to the heuristic.
+     * Method calculateScore the score that the current vertex has in a search by adding its
+     * distance to the heuristic. This is the result of criteria function
      *
      * @param goal the end goal for the search
      */
-    public void recalcScore(Vertex goal) {
-        score = setDistance() + heuristicEuclideanDistance(goal);
+    public void criteriaFunction(Vertex goal) {
+        fCost = setDistance() + heuristicEuclideanDistance(goal);
     }
 
     /**
@@ -89,21 +91,23 @@ public class Vertex implements Comparable<Vertex> {
      * @param v the vertex's previous value
      */
     public void setPrev(Vertex v) {
-        prev = v;
+        gCost = v;
     }
 
     /**
-     * The setDist method calculates the distance travelled in a search to reach the current vertex.
+     * The setDistance method calculates the distance travelled in a search to reach the current vertex.
      *
      * @return distance travelled
      */
+    //TODO - should I set the straight line - air distance in this calculation - to check
+    //TODO - May I should add here the formula f(n) = h(n) + g(n) - criteria function
     public double setDistance() {
-        if (prev == null) {
-            gx = 0;
+        if (gCost == null) {
+            totalGCost = 0; //when vertex is the starting point
         } else {
-            gx = prev.gx + sharedEdge(prev).w;
+            totalGCost = gCost.totalGCost + sharedEdge(gCost).weight;
         }
-        return gx;
+        return totalGCost;
     }
 
     /**
@@ -115,9 +119,9 @@ public class Vertex implements Comparable<Vertex> {
      */
     @Override
     public int compareTo(Vertex v) {
-        if (this.score > v.score) {
+        if (this.fCost > v.fCost) {
             return -1;
-        } else if (this.score < v.score) {
+        } else if (this.fCost < v.fCost) {
             return 1;
         } else {
             return 0;
