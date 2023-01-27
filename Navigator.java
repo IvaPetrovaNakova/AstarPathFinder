@@ -84,7 +84,7 @@ public class Navigator {
                     for (int i = 0; i < path.size() - 1; i++) {
                         pathFoundResult += path.get(i) + "->";
                     }
-                    pathFoundResult += path.get(path.size() - 1) + " (" + graph.getScore(endCity) + "km )";
+                    pathFoundResult += path.get(path.size() - 1) + " (" + graph.getTotalDistanceInKm(endCity) + "km )";
                     System.out.println(pathFoundResult); //prints result path
                 }
 

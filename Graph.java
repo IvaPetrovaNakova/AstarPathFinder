@@ -91,9 +91,9 @@ public class Graph {
      * @param v1 vertex to search
      * @return score
      */
-    public double getScore(String v1) {
-        int v = cities.get(v1);
-        return vertices[v].fCost;
+    public double getTotalDistanceInKm(String v1) {
+        int endCityIndex = cities.get(v1);
+        return vertices[endCityIndex].fCost;
     }
 
     /**
@@ -191,7 +191,7 @@ public class Graph {
             Edge e = startCity.edges.get(i);
             Vertex v = e.getOther(startCity);
             v.criteriaFunction(endCity); //calculates score
-            v.setPrev(startCity);  //sets previous vertex
+            v.setGCost(startCity);  //sets previous vertex
             openList.add(v); //adds to priority queue
         }
 
@@ -213,7 +213,7 @@ public class Graph {
                 v.criteriaFunction(endCity);
                 //if it is not already in the priority queue and it hasn't been explored yet
                 if (!openList.contains(v) && !closedList.containsKey(v)) {
-                    v.setPrev(currentPosition);
+                    v.setGCost(currentPosition);
                     openList.add(v);
                 }
             }

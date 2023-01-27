@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Vertex implements Comparable<Vertex> {
     private double latitude;
     private double longitude;
+    private int hCost; //TODO - change it later
     protected String city; //city name
 
     //stores an arraylist of all the edges connected to this vertex
@@ -58,19 +59,20 @@ public class Vertex implements Comparable<Vertex> {
      * and the current vertex using the formula for distance between two points on a sphere.
      *
      * @param v the other vertex
-     * @return the crow-flies distance between current vertex and the other vertex
+     * @return the straight line distance between current vertex and the other vertex
      */
     public double heuristicEuclideanDistance(Vertex v) {
 
         //convert all the values from degrees to radians
-        double lata = this.latitude * (Math.PI / 180);
-        double latb = v.latitude * (Math.PI / 180);
-        double lona = this.longitude * (Math.PI / 180);
-        double lonb = v.longitude * (Math.PI / 180);
+        double latitudeStartCity = this.latitude * (Math.PI / 180);
+        double latitudeEndCity = v.latitude * (Math.PI / 180);
+        double longitudeStartCity = this.longitude * (Math.PI / 180);
+        double longitudeEndCity = v.longitude * (Math.PI / 180);
 
         //uses distance formula to calculate the distance
-        double hCost = Math.acos(Math.sin(lata) * Math.sin(latb) +
-                Math.cos(lata) * Math.cos(latb) * Math.cos(lona - lonb)) * R;
+        double hCost = Math.acos(Math.sin(latitudeStartCity) *
+                Math.sin(latitudeEndCity) + Math.cos(latitudeStartCity) *
+                Math.cos(latitudeEndCity) * Math.cos(longitudeStartCity - longitudeEndCity)) * R;
 
         return hCost;
     }
@@ -90,7 +92,7 @@ public class Vertex implements Comparable<Vertex> {
      *
      * @param v the vertex's previous value
      */
-    public void setPrev(Vertex v) {
+    public void setGCost(Vertex v) {
         gCost = v;
     }
 
