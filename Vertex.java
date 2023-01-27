@@ -13,14 +13,18 @@ public class Vertex implements Comparable<Vertex> {
     private double longitude;
 
     //stores an arraylist of all the edges connected to this vertex
-    private ArrayList<Edge> edges;
+    protected ArrayList<Edge> edges;
 
     //holds the score of the vertex when come across in a search
-    private double score;
-    private double gx; //holds the distance travelled to this vertex when come across in a search
-    private String city; //city name
-    private Vertex prev; //the vertex that led to this vertex in a search
+    protected double score;
+    protected double gx; //holds the distance travelled to this vertex when come across in a search
+    protected String city; //city name
+    protected Vertex prev; //the vertex that led to this vertex in a search
     private final int R = 6371; //radius of earth
+
+    /**
+     * Class constructor specifying number of objects to create.
+     */
     public Vertex (String name, double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
@@ -57,9 +61,9 @@ public class Vertex implements Comparable<Vertex> {
     public double heuristicCalculationGeo(Vertex v){
         //convert all the values from degrees to radians
         double lata = this.latitude * (Math.PI / 180);
-        double latb = v.latitude*(Math.PI/180);
-        double lona = this.longitude*(Math.PI/180);
-        double lonb = v.longitude*(Math.PI/180);
+        double latb = v.latitude * (Math.PI / 180);
+        double lona = this.longitude * (Math.PI / 180);
+        double lonb = v.longitude * (Math.PI / 180);
         //uses distance formula to calculate the distance
         double dist = Math.acos(Math.sin(lata) * Math.sin(latb) +
                 Math.cos(lata) * Math.cos(latb) * Math.cos(lona-lonb)) * R;
@@ -73,7 +77,7 @@ public class Vertex implements Comparable<Vertex> {
      * @param goal  the end goal for the search
      */
     public void recalcScore(Vertex goal){
-        score = setDist() + heuristicCalculationGeo(goal);
+        score = setDistance() + heuristicCalculationGeo(goal);
     }
 
     /**
@@ -88,7 +92,7 @@ public class Vertex implements Comparable<Vertex> {
      * The setDist method calculates the distance travelled in a search to reach the current vertex.
      * @return distance travelled
      */
-    public double setDist(){
+    public double setDistance() {
         if (prev == null) {
             gx = 0;
         }

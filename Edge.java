@@ -9,10 +9,13 @@ public class Edge implements Comparable<Edge> {
     private Vertex v2;
     public double w;
 
+    /**
+     * Class constructor specifying number of objects to create.
+     */
     public Edge(Vertex vert1, Vertex vert2, double weight){
-        v1 = vert1;
-        v2 = vert2;
-        w = weight;
+        this.v1 = vert1;
+        this.v2 = vert2;
+        this.w = weight;
     }
 
     /**
@@ -55,11 +58,11 @@ public class Edge implements Comparable<Edge> {
      */
     @Override
     public int compareTo(Edge other){
-        double temp = w-other.w;
-        if(temp > 0){
+        double temp = w - other.w;
+        if(temp > 0) {
             temp = 1;
         }
-        else if (temp < 0){
+        else if (temp < 0) {
             temp = -1;
         }
         return (int)temp;

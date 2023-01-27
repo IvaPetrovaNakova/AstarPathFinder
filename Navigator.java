@@ -4,38 +4,41 @@ import java.util.ArrayList;
 
 public class Navigator {
     public static void main(String[] args){
+
         try{
-            Scanner fileReader = new Scanner(new File("C:\\Users\\User\\Desktop\\US-capitals.geo1.txt"));
-            Scanner temp = new Scanner(new File("C:\\Users\\User\\Desktop\\US-capitals.geo1.txt"));
-            int size = 0;
             //The first scanner goes through the file and counts the number of vertices the graph
             // will have.
+            Scanner fileReader = new Scanner(new File("C:\\Users\\User\\Desktop\\Bulgarian Roads.txt"));
+            Scanner temp = new Scanner(new File("C:\\Users\\User\\Desktop\\Bulgarian Roads.txt"));
+
+            int size = 0;
+
             while (temp.hasNextLine()) {
                 String line = temp.nextLine();
-                if(line.equals("")){
+                if (line.equals("")) {
                     break;
                 }
                 size++;
             }
             Graph graph = new Graph(size);
+
             //the first section of the file reads in the different cities and adds them to the graph
             // as vertices
-            while(fileReader.hasNextLine()){
+            while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                if(line.equals("")){
+                if (line.equals("")) {
                     break;
                 }
-                else{
+                else {
                     String[]words = line.split("\t");
                     graph.addVertex(words[0].toLowerCase(),Double.parseDouble(words[1]),
                             Double.parseDouble(words[2]));
                 }
-
             }
 
             //the next section of the file reads in the connections between the different US cities and adds those
             //edges to the graph
-            while(fileReader.hasNextLine()){
+            while(fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[]words = line.split("\t");
                 graph.addEdge(words[0].toLowerCase(),words[1].toLowerCase(),
@@ -44,7 +47,7 @@ public class Navigator {
             //once the graph is complete, head to userInteraction to start searching the graph
             userInteraction(graph);
         }
-        catch(Exception FileNotFoundException){
+        catch(Exception FileNotFoundException) {
             System.out.println("file not found :(");
         }
     }
@@ -59,27 +62,27 @@ public class Navigator {
         System.out.println("Welcome to navigator! Enter two cities you would like to see the path between. Press \"Enter\" to leave.");
         Scanner scan = new Scanner(System.in);
         String userInput = "beepboop"; //initial (unimportant) value for userInput
-        while(!userInput.equals("")){
+        while (!userInput.equals("")) {
             userInput = scan.nextLine();
-            if(userInput.equals("")){ //when the user hits enter, break out of the while loop
+            if(userInput.equals("")) { //when the user hits enter, break out of the while loop
                 break;
             }
 
-            try{
+            try {
                 String[]cities = userInput.split("-"); //break up the user input, making sure it is the correct form
-                String v1 = cities[0].toLowerCase();
-                String v2 = cities[1].toLowerCase();
-                ArrayList<Vertex> path = graph.astar(v1,v2); //searches the graph, returning the path found
+                String startCity = cities[0].toLowerCase();
+                String endCity = cities[1].toLowerCase();
+                ArrayList<Vertex> path = graph.aStarConnection(startCity, endCity); //searches the graph, returning the path found
                 if(path == null){
-                    System.out.println("Sorry, no path exists between " + v1 + " and " + v2 + ".");
+                    System.out.println("Sorry, no path exists between " + startCity + " and " + endCity + ".");
                 }
                 else{
-                    String pf = "path found: ";
+                    String pathFoundResult = "path found: ";
                     for(int i = 0; i < path.size()-1; i++){
-                        pf += path.get(i) + "->";
+                        pathFoundResult += path.get(i) + "->";
                     }
-                    pf += path.get(path.size()-1) + " (" + graph.getScore(v2) + "km )";
-                    System.out.println(pf); //prints path
+                    pathFoundResult += path.get(path.size()-1) + " (" + graph.getScore(endCity) + "km )";
+                    System.out.println(pathFoundResult); //prints result path
                 }
 
                 graph.reset(); //resets the vertex values for the next search
