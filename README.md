@@ -5,11 +5,9 @@ Mira,
 1. The version of the project I am currently working on is in the testStrLine folder.
 As input use the text file I created instead of scv.file in folder inputData.  
 Look at the UML diagram to easily navigate then in the code, it will change finally when I clear the concept
-2. The algorithm does not give the shortest path, I am working on it, but I will not refuse a little help
+2. The algorithm finally gives me the shortest path.
 3. I don't like the code either, I have wrote everything in only 3 classes. I welcome advice on how to develop it and if there is any point in making interfaces for the graph and the algorithm.
-4. I am currently working on adding junit tests - for now I work to check the graph - adding vertexes, etc...
-Finally
-The algorithm is not working as expected at the moment - I am working on fixing it, but I am asking for guidance on how to ...
+4. I am currently working on adding junit tests - for now I work to check the graph and the algorithms - adding vertexes, etc...
 
 
 
