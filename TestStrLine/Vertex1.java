@@ -14,29 +14,24 @@ import dataStructure.MyArrayList;
  */
 public class Vertex1 implements Comparable<Vertex1> {
 
-    private final double cost;
-
-    // getH() this is heuristic function(at here we just give a number,but maybe can use the straight-line distance to replace)
-    private double hCost; //TODO - change it later ///the estimate, according to the heuristic function, of the cost of getting from n to the goal node.
     protected String city; //city name
-
+    private final double hCost;
     //stores an arraylist of all the edges connected to this vertex
     protected MyArrayList<Edge1> edges;
 
     //holds the score of the vertex when come across in a search
     protected double fCost; ////g(n)+h(n), intuitively, this is the estimate of the best solution that goes through n
-    protected double gCost; //the cost of getting from the initial node to n
+    protected double gCost; //the cost of getting from the initial node to n in km
     protected Vertex1 parent; //the vertex that hold the previously cost
 
     /**
      * Class constructor specifying number of objects to create.
      */
-    public Vertex1(String name, double cost) {
-        this.cost = cost;
+    public Vertex1(String name, double hCost) {
+        this.hCost = hCost;
         this.edges = new MyArrayList<Edge1>();
         this.fCost = 0;
         this.gCost = 0;
-        this.hCost = 0;
         this.city = name;
         this.parent = null;
     }
@@ -67,7 +62,7 @@ public class Vertex1 implements Comparable<Vertex1> {
 
     //TODO
     public double getStraightLineDistance(Vertex1 v) {
-        return this.cost;
+        return hCost;
     }
 
     /**
@@ -114,9 +109,9 @@ public class Vertex1 implements Comparable<Vertex1> {
      */
     @Override
     public int compareTo(Vertex1 v) { //heuristic comparator
-        if (this.hCost > v.hCost) {
+        if (this.fCost < v.fCost) {
             return -1;
-        } else if (this.hCost < v.hCost) {
+        } else if (this.fCost > v.fCost) {
             return 1;
         } else {
             return 0;
