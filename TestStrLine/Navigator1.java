@@ -1,6 +1,6 @@
 package TestStrLine;
 
-import dataStructure.MyArrayList;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.util.Scanner;
@@ -74,7 +74,7 @@ public class Navigator1 {
                 String[] cities = userInput.split("-"); //break up the user input, making sure it is the correct form
                 String startCity = cities[0].toLowerCase();
                 String endCity = cities[1].toLowerCase();
-                MyArrayList<Vertex1> path = graph.aStarConnection(startCity, endCity); //searches the graph, returning the path found
+                ArrayList<Vertex1> path = graph.aStarConnection(startCity, endCity); //searches the graph, returning the path found
                 if (path == null) {
                     System.out.println("Sorry, no path exists between " + startCity + " and " + endCity + ".");
                 } else {

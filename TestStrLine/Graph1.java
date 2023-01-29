@@ -1,7 +1,6 @@
 package TestStrLine;
 
-import dataStructure.MyArrayList;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.PriorityQueue;
@@ -32,9 +31,9 @@ public class Graph1 {
      * @param long longitude
      * @param s
      */
-    public void addVertex(String cityNameFrom, String cityNameTo, double straightLine) {
+    public void addVertex(String cityNameFrom, String cityNameTo, double cost) {
         cities.put(cityNameFrom, numVertices); //put into the hashmap to store its index in the vertices array
-        Vertex1 vert = new Vertex1(cityNameFrom, straightLine); //create a new vertex
+        Vertex1 vert = new Vertex1(cityNameFrom, cost); //create a new vertex
         graph[numVertices] = vert; //store it in the array
         numVertices++;
     }
@@ -165,7 +164,7 @@ public class Graph1 {
      * @param v2 goal vertex name get the index from graph
      * @return An arraylist of the path taken to connect the vertices
      */
-    public MyArrayList<Vertex1> aStarConnection(String v1, String v2) {
+    public ArrayList<Vertex1> aStarConnection(String v1, String v2) {
         //gets the vertices from the list and calls a search method
         int startCityIndex = cities.get(v1);
         int endCityIndex = cities.get(v2);
@@ -180,7 +179,7 @@ public class Graph1 {
      * @param v2 goal vertex
      * @return An arraylist of the path taken to connect the vertices
      */
-    private MyArrayList<Vertex1> aStarSearch(Vertex1 startCity, Vertex1 endCity) {
+    private ArrayList<Vertex1> aStarSearch(Vertex1 startCity, Vertex1 endCity) {
 
         //The OPEN list keeps track of those nodes that need to be examined
         PriorityQueue<Vertex1> openList = new PriorityQueue<Vertex1>();
@@ -245,8 +244,8 @@ public class Graph1 {
      * @param end    the goal vertex of the search
      * @return path     an arraylist of the path taken from the start node to the goal node
      */
-    private MyArrayList<Vertex1> findPath(Hashtable<Vertex1, Vertex1> finder, Vertex1 start, Vertex1 end) {
-        MyArrayList<Vertex1> path = new MyArrayList<Vertex1>();
+    private ArrayList<Vertex1> findPath(Hashtable<Vertex1, Vertex1> finder, Vertex1 start, Vertex1 end) {
+        ArrayList<Vertex1> path = new ArrayList<Vertex1>();
         Vertex1 curr = end;
         Vertex1 from;
         while (!curr.city.equals(start.city)) { //while the start isn't reached, retrace

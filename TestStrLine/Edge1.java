@@ -10,7 +10,7 @@ package TestStrLine;
 public class Edge1 implements Comparable<Edge1> {
     private Vertex1 v1;
     private Vertex1 v2;
-    protected double weight;
+    public double weight;
 
     /**
      * Class constructor specifying number of objects to create.

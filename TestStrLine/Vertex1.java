@@ -13,10 +13,8 @@ import dataStructure.MyArrayList;
  * @param name  the city name
  */
 public class Vertex1 implements Comparable<Vertex1> {
-    //private final double latitude;
-    //private final double longitude;
 
-    private final double straightLine;
+    private final double cost;
 
     // getH() this is heuristic function(at here we just give a number,but maybe can use the straight-line distance to replace)
     private double hCost; //TODO - change it later ///the estimate, according to the heuristic function, of the cost of getting from n to the goal node.
@@ -33,8 +31,8 @@ public class Vertex1 implements Comparable<Vertex1> {
     /**
      * Class constructor specifying number of objects to create.
      */
-    public Vertex1(String name, double straightLine) {
-        this.straightLine = straightLine;
+    public Vertex1(String name, double cost) {
+        this.cost = cost;
         this.edges = new MyArrayList<Edge1>();
         this.fCost = 0;
         this.gCost = 0;
@@ -69,10 +67,7 @@ public class Vertex1 implements Comparable<Vertex1> {
 
     //TODO
     public double getStraightLineDistance(Vertex1 v) {
-
-        hCost = straightLine + gCost;
-
-        return hCost;
+        return this.cost;
     }
 
     /**
@@ -119,14 +114,15 @@ public class Vertex1 implements Comparable<Vertex1> {
      */
     @Override
     public int compareTo(Vertex1 v) { //heuristic comparator
-        if (this.fCost > v.fCost) {
+        if (this.hCost > v.hCost) {
             return -1;
-        } else if (this.fCost < v.fCost) {
+        } else if (this.hCost < v.hCost) {
             return 1;
         } else {
             return 0;
         }
     }
+
 
     /**
      * The sharedEdge method finds the edge shared between two vertices.
