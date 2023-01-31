@@ -28,5 +28,7 @@ the cities. Then inside each cell there is a composite value – split by pipe (
 The program should find the best road and print the names of all cities that should be visited. 
 Use A* search strategy
 
+https://moodle.edu.reachup.bg/
+
 ![Example](https://user-images.githubusercontent.com/109521961/215882157-99755dcb-66fb-41ea-9067-f3b1de2a020c.png)
 
