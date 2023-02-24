@@ -2,6 +2,7 @@ package com.reachUp.AStar.project.entity;
 
 import com.reachUp.AStar.project.entity.CityState;
 
+
 public class Action {
 
     public CityState child;
