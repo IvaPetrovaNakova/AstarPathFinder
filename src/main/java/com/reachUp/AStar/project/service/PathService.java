@@ -1,0 +1,14 @@
+package com.reachUp.AStar.project.service;
+
+import com.reachUp.AStar.project.entity.Path;
+
+import java.util.List;
+
+
+public interface PathService {
+
+public List<Path> getAllPaths();
+public Path getPathsById(Long pathId);
+public Path addOrUpdatePath(Path path);
+public Path deletePath(Long pathId) throws Exception;
+}

@@ -2,7 +2,7 @@ package com.reachUp.AStar.project.entity;
 
 public class Node {
 
-    public CityState state;
+    public City state;
     public int pathCost;
     public Node parent;
 
@@ -15,7 +15,7 @@ public class Node {
      * Constructor
      * @param stValue
      */
-    public Node(CityState stValue) {
+    public Node(City stValue) {
         this.state = stValue;
         this.pathCost = 0;
         this.parent = null;

@@ -1,9 +1,9 @@
 package com.reachUp.AStar.project.service;
 
-import com.reachUp.AStar.project.entity.Action;
+import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.entity.Node;
 import com.reachUp.AStar.project.SearchProblem;
-import com.reachUp.AStar.project.entity.CityState;
+import com.reachUp.AStar.project.entity.City;
 
 import java.util.ArrayList;
 import java.util.Comparator;                                                                                                                                                                                                                                    
@@ -22,7 +22,7 @@ public class PathFinder {
      */
     public Node solve(SearchProblem prblm) {
 
-        CityState startState = prblm.getStartState();
+        City startState = prblm.getStartState();
         Node selectedNode = null;
         int numNodesPushedToOpenList = 0;
 
@@ -42,7 +42,7 @@ public class PathFinder {
         });
 
         //ClosedList stores cities already visited
-        ArrayList<CityState> visitedList = new ArrayList<>();
+        ArrayList<City> visitedList = new ArrayList<>();
 
        // boolean reachGoal = false; //replace with method reachGoal in ProblemSearch
        // City currentPosition = fromCity;// replace with startState
@@ -68,11 +68,11 @@ public class PathFinder {
                 System.out.println(
                         "Visited list Nodes: "
                                 + visitedList);
-                ArrayList<Action> children = prblm.getChildren(selectedNode.state);
+                ArrayList<Path> children = prblm.getChildren(selectedNode.state);
 
 
                 for (int i = 0; i < children.size(); i++) {
-                    Action currentlyConsidering = children.get(i);
+                    Path currentlyConsidering = children.get(i);
                     Node childNode = new Node(currentlyConsidering.child);
                     childNode.pathCost = selectedNode.pathCost + currentlyConsidering.cost;
                     childNode.parent = selectedNode;
@@ -92,7 +92,7 @@ public class PathFinder {
             // else insert children obtained from getChildren into openList
         }  while (!openList.isEmpty());
             //if not find the goal return an empty node
-            return new Node(new CityState(""));
+            return new Node(new City(""));
         }
     }
 

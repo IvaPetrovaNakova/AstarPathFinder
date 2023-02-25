@@ -1,7 +1,7 @@
 package com.reachUp.AStar.project;
 
-import com.reachUp.AStar.project.entity.Action;
-import com.reachUp.AStar.project.entity.CityState;
+import com.reachUp.AStar.project.entity.Path;
+import com.reachUp.AStar.project.entity.City;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,8 +20,8 @@ import java.util.Scanner;
  * convergence in A* search.
  */
 public class SearchProblem {
-    CityState startState;
-    CityState goalState;
+    City startState;
+    City goalState;
 
     /**
      * Class constructor specifying number of objects to create
@@ -29,8 +29,8 @@ public class SearchProblem {
      * @param goal desired ending point
      */
     public SearchProblem(String start, String goal) {
-        startState = new CityState(start);
-        goalState = new CityState(goal);
+        startState = new City(start);
+        goalState = new City(goal);
     }
 
     /**
@@ -38,7 +38,7 @@ public class SearchProblem {
      *
      * @return starting point
      */
-    public CityState getStartState() {
+    public City getStartState() {
         return startState;
     }
 
@@ -50,7 +50,7 @@ public class SearchProblem {
      * @return true if the goal is reached
      * otherwise false
      */
-    public boolean reachGoal(CityState st) {
+    public boolean reachGoal(City st) {
         if (st.city.equals(this.goalState.city)) {
             return true;
         }
@@ -64,9 +64,9 @@ public class SearchProblem {
      * @param st current city child
      * @return list of children
      */
-    public ArrayList<Action> getChildren(CityState st) {
+    public ArrayList<Path> getChildren(City st) {
 
-        ArrayList<Action> children = new ArrayList<Action>();
+        ArrayList<Path> children = new ArrayList<Path>();
 
         Scanner sc = null;
 
@@ -81,109 +81,109 @@ public class SearchProblem {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Vidin")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Montana")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Montana")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Vratsa")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Vratsa")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Pleven")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Pleven")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("VelikoTarnovo")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("VelikoTarnovo")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Ruse")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Ruse")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Shumen")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Shumen")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Dobrich")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Dobrich")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Varna")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Varna")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Sofia")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Sofia")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Pernik")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Pernik")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Bansko")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Bansko")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Blagoevgrad")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Blagoevgrad")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Pazardzhik")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Pazardzhik")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Plovdiv")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Plovdiv")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Haskovo")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Haskovo")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Sliven")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Sliven")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 } else if (firstSpace.equals("Burgas")) {
                     String city = sc.next();
                     int cost = Integer.parseInt(sc.next());
                     if(st.city.equals("Burgas")) {
-                        children.add(new Action(new CityState(city), cost));
+                        children.add(new Path(new City(city), cost));
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class SearchProblem {
      * @param st gets the children node
      * @return heuristic value
      */
-    public int heuristic(CityState st) { // gets a child value - Vratsa, Pleven, Sofia
+    public int heuristic(City st) { // gets a child value - Vratsa, Pleven, Sofia
 
         int heuristic = 0;
 

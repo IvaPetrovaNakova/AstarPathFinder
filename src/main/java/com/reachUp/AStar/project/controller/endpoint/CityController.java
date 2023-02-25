@@ -1,6 +1,6 @@
-package com.reachUp.AStar.project.controller;
+package com.reachUp.AStar.project.controller.endpoint;
 
-import com.reachUp.AStar.project.entity.CityState;
+import com.reachUp.AStar.project.entity.City;
 import com.reachUp.AStar.project.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,51 +11,55 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cities")
-public class CItyController {
+public class CityController {
+
+    private final CityService cityService;
 
     @Autowired
-    private CityService cityService;
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
+    }
 
     @GetMapping("/allCities")
-    public ResponseEntity<List<CityState>> getAllCities() {
-        List<CityState> cities = null;
+    public ResponseEntity<List<City>> getAllCities() {
+        List<City> cities = null;
         try {
             cities = cityService.getAllCities();
         } catch (Exception ex){
             ex.getMessage();
         }
-        return new ResponseEntity<List<CityState>>(cities, HttpStatus.OK);
+        return new ResponseEntity<List<City>>(cities, HttpStatus.OK);
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<CityState> getCityById(@PathVariable("id") Long cityId) {
-        CityState cities = null;
+    public ResponseEntity<City> getCityById(@PathVariable("id") Long cityId) {
+        City cities = null;
         try {
             cities = cityService.getCitiesById(cityId);
         } catch (Exception ex){
             ex.getMessage();
         }
-        return new ResponseEntity<CityState> (cities, HttpStatus.OK);
+        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
 
     @PostMapping("/addOrUpdate")
-    public ResponseEntity<CityState> addOrUpdate(@RequestBody CityState city) {
-        CityState cities = null;
+    public ResponseEntity<City> addOrUpdate(@RequestBody City city) {
+        City cities = null;
         try {
             cities = cityService.addOrUpdateCities(city);
         } catch (Exception ex){
             ex.getMessage();
         }
-        return new ResponseEntity<CityState> (cities, HttpStatus.OK);
+        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
     @DeleteMapping ("/delete/{id}")
-    public ResponseEntity<CityState> delete(@PathVariable("id") Long cityId) {
-        CityState cities = null;
+    public ResponseEntity<City> delete(@PathVariable("id") Long cityId) {
+        City cities = null;
         try {
             cities = cityService.deleteCity(cityId);
         } catch (Exception ex){
             ex.getMessage();
         }
-        return new ResponseEntity<CityState> (cities, HttpStatus.OK);
+        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
 }

@@ -1,11 +1,13 @@
 package com.reachUp.AStar.project.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "city_state")
-public class CityState {
+public class City {
 
     @Id
     @SequenceGenerator(
@@ -26,14 +28,26 @@ public class CityState {
             columnDefinition = "TEXT"
     )
     public String city;
-    // private double longitude;
-    // private double latitude;
-    // private String prominance;
 
-    public CityState() {
+//    @OneToMany(
+//            mappedBy = "city_state",
+//            orphanRemoval = true,
+//            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+//            fetch = FetchType.LAZY
+//    )
+//    private List<Path> paths = new ArrayList<>();
+
+    /**
+     * No arguments constructor
+     */
+    public City() {
     }
 
-    public CityState(String city) {
+    /**
+     * Constructor
+     * @param city gets city name
+     */
+    public City(String city) {
         this.city = city;
     }
 
@@ -45,8 +59,8 @@ public class CityState {
     @Override
     public boolean equals(Object obj) {
         boolean retVal = false;
-        if (obj instanceof CityState) {
-            CityState ptr = (CityState) obj;
+        if (obj instanceof City) {
+            City ptr = (City) obj;
             retVal = ptr.city.equals(this.city);
         }
         return retVal;
