@@ -1,6 +1,10 @@
 package com.reachUp.AStar.project.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "path_state")
@@ -24,6 +28,8 @@ public class Path {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NotBlank(message = "The destination point must be not blank")
+    @Length(min = 3, max = 512, message = "The city name must have 3-512 characters")
     public String from;
 
     @Column(
@@ -31,14 +37,21 @@ public class Path {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NotBlank(message = "The ending point must be not blank")
+    @Length(min = 3, max = 512, message = "The city name must have 3-512 characters")
     public String to;
 
     @Column(
             name = "travelDistance",
             nullable = false
     )
+    @NotBlank(message = "The direct distance cost must not be blank")
+    @Min(value = 1, message = "The direct destination must be greater than 0")
     public int cost;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "city_id")
     public City child;
 

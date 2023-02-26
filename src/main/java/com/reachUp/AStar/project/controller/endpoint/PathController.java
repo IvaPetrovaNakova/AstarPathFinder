@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class PathController {
     }
 
     @PostMapping("/addOrUpdate")
-    public ResponseEntity<Path> addOrUpdate(@RequestBody Path path) {
+    public ResponseEntity<Path> addOrUpdate(@RequestBody @Valid Path path) {
         Path paths = null;
         try {
             paths = pathService.addOrUpdatePath(path);

@@ -1,6 +1,9 @@
 package com.reachUp.AStar.project.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,9 +30,14 @@ public class City {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NotBlank(message = "City name must not be blank")
+    @Length(min = 3, max = 512, message = "City name must have 3-512 characters")
     public String city;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "path_id")
     private List<Path> paths = new ArrayList<>();
 

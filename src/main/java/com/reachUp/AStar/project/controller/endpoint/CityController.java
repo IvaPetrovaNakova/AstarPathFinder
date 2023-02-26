@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class CityController {
     }
 
     @PostMapping("/addOrUpdate")
-    public ResponseEntity<City> addOrUpdate(@RequestBody City city) {
+    public ResponseEntity<City> addOrUpdate(@RequestBody @Valid City city) { //@Valid throw an exception
         City cities = null;
         try {
             cities = cityService.addOrUpdateCities(city);
