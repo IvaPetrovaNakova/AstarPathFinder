@@ -63,4 +63,16 @@ public class PathController {
         }
         return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
+
+    @GetMapping("/getChildren/{city_from}")
+    public ResponseEntity<List<Path>> getChildren(@PathVariable("city_from") String cityFrom) {
+        List<Path> paths = null;
+        try {
+            paths = pathService.getChildren(cityFrom);
+        } catch (Exception ex){
+            ex.getMessage();
+        }
+        return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
+    }
+
 }

@@ -48,4 +48,9 @@ public class PathServiceImpl implements PathService {
         }
         return deletePath;
     }
+
+    @Override
+    public List<Path> getChildren(String cityFrom) {
+        return pathRepository.getChildren(cityFrom);
+    }
 }

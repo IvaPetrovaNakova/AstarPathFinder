@@ -38,16 +38,8 @@ public class Path {
             nullable = false
     )
     public int cost;
-  /*  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "",
-            nullable = false,
-            referencedColumnName = "city_id",
-            foreignKey = @ForeignKey(
-                    name = ""
-            )
-    )*/
-    @Transient
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     public City child;
 
     /**

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "city_state")
+@Table(name = "city")
 public class City {
 
     @Id
@@ -19,23 +19,19 @@ public class City {
             strategy = GenerationType.SEQUENCE,
             generator = "city_sequence"
     )
-    @Column(name = "city_id")
+    @Column(name = "id")
     private Long Id;
 
     @Column(
-            name = "city_name",
+            name = "name",
             nullable = false,
             columnDefinition = "TEXT"
     )
     public String city;
 
-//    @OneToMany(
-//            mappedBy = "city_state",
-//            orphanRemoval = true,
-//            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-//            fetch = FetchType.LAZY
-//    )
-//    private List<Path> paths = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "path_id")
+    private List<Path> paths = new ArrayList<>();
 
     /**
      * No arguments constructor
