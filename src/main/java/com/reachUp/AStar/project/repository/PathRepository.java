@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface PathRepository extends JpaRepository<Path, Long> {
 
-    //TODO - native query getChildren();
+    //TODO - native query getDirectPaths();
     @Query(value = "SELECT * from path_state where city_from = :city_from", nativeQuery = true)
-    public List<Path> getChildren(@Param("city_from") String children);
+    public List<Path> getDirectPaths(@Param("city_from") String children);
 }

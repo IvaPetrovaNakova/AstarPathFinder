@@ -51,6 +51,6 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public List<Path> getChildren(String cityFrom) {
-        return pathRepository.getChildren(cityFrom);
+        return pathRepository.getDirectPaths(cityFrom);
     }
 }
