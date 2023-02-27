@@ -65,7 +65,7 @@ public class PathController {
         return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
-    @GetMapping("/getChildren/{city_from}")
+    @GetMapping("/getDirectPaths/{city_from}")
     public ResponseEntity<List<Path>> getChildren(@PathVariable("city_from") String cityFrom) {
         List<Path> paths = null;
         try {
@@ -75,5 +75,4 @@ public class PathController {
         }
         return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
     }
-
 }

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "path_state")
@@ -45,9 +46,9 @@ public class Path {
             name = "travelDistance",
             nullable = false
     )
-    @NotBlank(message = "The direct distance cost must not be blank")
-    @Min(value = 1, message = "The direct destination must be greater than 0")
-    public int cost;
+   // @NotBlank(message = "The direct distance cost must not be blank")
+    @Min(value = 1, message = "The direct distance cost must not be blank")
+    public Integer cost;
     @ManyToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
