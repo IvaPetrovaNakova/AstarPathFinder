@@ -4,6 +4,7 @@ import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.entity.Node;
 import com.reachUp.AStar.project.SearchProblem;
 import com.reachUp.AStar.project.entity.City;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;                                                                                                                                                                                                                                    
@@ -13,6 +14,7 @@ import java.util.PriorityQueue;
  * Class define initialize start node, open list and
  * visited list set (for graph search)
   */
+
 public class PathFinder {
 
     /**

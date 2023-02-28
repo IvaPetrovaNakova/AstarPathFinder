@@ -55,6 +55,10 @@ public class City {
         this.city = city;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public String toString() {
         return this.city;

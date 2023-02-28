@@ -33,6 +33,11 @@ public class SearchProblem {
         goalState = new City(goal);
     }
 
+    public SearchProblem(City startState, City goalState) {
+        this.startState = startState;
+        this.goalState = goalState;
+    }
+
     /**
      * Gives the city name
      *
