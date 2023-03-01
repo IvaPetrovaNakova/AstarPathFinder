@@ -11,6 +11,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.*;
 
+/**
+ * This class customize error message by given validation
+ * Postman collection using for result
+ */
+
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -32,6 +37,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             String errorMessage = fieldError.getDefaultMessage();
             listErrors.add(errorMessage);
         }
+
+        responseBody.put("errors", listErrors);
+
         return new ResponseEntity<>(responseBody, headers, status);
     }
 }
