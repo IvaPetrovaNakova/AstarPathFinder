@@ -1,8 +1,9 @@
 package com.reachUp.AStar.project.controller.endpoint;
 
-import com.reachUp.AStar.project.entity.City;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.service.PathService;
+import com.reachUp.AStar.project.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +67,7 @@ public class PathController {
     }
 
     @GetMapping("/getDirectPaths/{city_from}")
+    @JsonView(View.Base.class)
     public ResponseEntity<List<Path>> getChildren(@PathVariable("city_from") String cityFrom) {
         List<Path> paths = null;
         try {

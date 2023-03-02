@@ -1,5 +1,7 @@
 package com.reachUp.AStar.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.reachUp.AStar.project.view.View;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -30,6 +32,7 @@ public class Path {
     )
     @NotBlank(message = "The destination point must be not blank")
     @Length(min = 3, max = 512, message = "The city name must have 3-512 characters")
+    @JsonView(View.Base.class)
     public String from;
 
     @Column(
@@ -39,14 +42,15 @@ public class Path {
     )
     @NotBlank(message = "The ending point must be not blank")
     @Length(min = 3, max = 512, message = "The city name must have 3-512 characters")
+    @JsonView(View.Base.class)
     public String to;
 
     @Column(
             name = "travelDistance",
             nullable = false
     )
-   // @NotBlank(message = "The direct distance cost must not be blank")
     @Min(value = 1, message = "The direct distance cost must not be blank")
+    @JsonView(View.Base.class)
     public Integer cost;
     @ManyToOne(
             cascade = CascadeType.ALL,
@@ -61,7 +65,7 @@ public class Path {
     public Path(){}
 
     /**
-     * Constructor
+     * Constructor use in entity
      * @param from gets the starting point
      * @param to gets the ending points
      * @param cost distance in kilometer
