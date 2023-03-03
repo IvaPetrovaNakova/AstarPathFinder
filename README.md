@@ -17,7 +17,7 @@ Backend Logic
 
 IDE
 
-* Intelij
+* IntelliJ
 
 Optional
 
