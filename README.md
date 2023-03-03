@@ -7,17 +7,21 @@ Front end
 * No HTML, CSS, JS performance
 
 Backend Logic
-Java 11
-Gradle
-Spring Boot
-JPA
-MySQL 8 on localhost
-Server
-Tomcat
+
+* Java 11
+* Gradle
+* Spring Boot
+* JPA
+* MySQL 8 on localhost
+* Server
+
 IDE
-Intelij
+
+* Intelij
+
 Optional
-Tomcat
+
+* Tomcat
 
 https://moodle.edu.reachup.bg/
 
