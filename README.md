@@ -3,7 +3,9 @@ Path Planning project solving problem to find the shortes way between two cietie
 Technology used in this project:
 
 Front end
-No HTML, CSS, JS performance
+
+* No HTML, CSS, JS performance
+
 Backend Logic
 Java 11
 Gradle
