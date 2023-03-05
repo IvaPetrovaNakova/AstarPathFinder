@@ -1,12 +1,11 @@
 package com.reachUp.AStar.project.service;
 
+import com.reachUp.AStar.dataStructure.MyArrayList;
 import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.entity.Node;
 import com.reachUp.AStar.project.SearchProblem;
 import com.reachUp.AStar.project.entity.City;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;                                                                                                                                                                                                                                    
 import java.util.PriorityQueue;
 
@@ -45,7 +44,7 @@ public class PathFinder {
         });
 
         //initialize the visitedList
-        ArrayList<City> visitedList = new ArrayList<>();
+        MyArrayList<City> visitedList = new MyArrayList<>();
 
        //
         openList.add(new Node(startState));
@@ -70,7 +69,7 @@ public class PathFinder {
                 System.out.println(
                         "Visited list Nodes: "
                                 + visitedList);
-                ArrayList<Path> children = prblm.getChildren(selectedNode.state);
+                MyArrayList<Path> children = prblm.getChildren(selectedNode.state);
 
 
                 for (int i = 0; i < children.size(); i++) {

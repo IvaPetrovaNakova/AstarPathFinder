@@ -1,7 +1,4 @@
 package com.reachUp.AStar.project;
-
-
-
 import com.reachUp.AStar.project.entity.Node;
 import com.reachUp.AStar.project.service.PathFinder;
 

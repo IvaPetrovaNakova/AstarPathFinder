@@ -1,11 +1,11 @@
 package com.reachUp.AStar.project;
 
+import com.reachUp.AStar.dataStructure.MyArrayList;
 import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.entity.City;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -74,9 +74,9 @@ public class SearchProblem {
      * @param st current city child
      * @return list of children
      */
-    public ArrayList<Path> getChildren(City st) {
+    public MyArrayList<Path> getChildren(City st) {
 
-        ArrayList<Path> children = new ArrayList<Path>();
+        MyArrayList<Path> children = new MyArrayList<>();
 
         Scanner sc = null;
 

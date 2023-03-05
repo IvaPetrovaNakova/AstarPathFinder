@@ -1,11 +1,10 @@
 package com.reachUp.AStar.project.entity;
 
+import com.reachUp.AStar.dataStructure.MyArrayList;
+import com.reachUp.AStar.dataStructure.MyList;
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -39,7 +38,7 @@ public class City {
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "path_id")
-    private List<Path> paths = new ArrayList<>();
+    private MyList<Path> paths = new MyArrayList<>();
 
     /**
      * No arguments constructor
