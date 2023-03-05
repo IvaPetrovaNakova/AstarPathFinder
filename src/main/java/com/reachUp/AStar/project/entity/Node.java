@@ -22,7 +22,8 @@ public class Node {
     }
 
     /**
-     * Print the back path
+     * Backtrace from goal to start node
+     *
      */
     public void printBackTrace() {
         if (parent != null)

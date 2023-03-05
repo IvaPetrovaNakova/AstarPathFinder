@@ -24,6 +24,7 @@ public class PathFinder {
      */
     public Node solve(SearchProblem prblm) {
 
+        //initialize the starting point
         City startState = prblm.getStartState();
         Node selectedNode = null;
         int numNodesPushedToOpenList = 0;
@@ -39,15 +40,14 @@ public class PathFinder {
             public int compare(Node i, Node j) {
                 return
                 ((i.pathCost + prblm.heuristic(i.state))
-                - (j.pathCost+ prblm.heuristic(j.state)));
+                - (j.pathCost + prblm.heuristic(j.state)));
             }
         });
 
-        //ClosedList stores cities already visited
+        //initialize the visitedList
         ArrayList<City> visitedList = new ArrayList<>();
 
-       // boolean reachGoal = false; //replace with method reachGoal in ProblemSearch
-       // City currentPosition = fromCity;// replace with startState
+       //
         openList.add(new Node(startState));
 
         do {

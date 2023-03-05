@@ -25,14 +25,19 @@ public class SearchProblem {
 
     /**
      * Class constructor specifying number of objects to create
-     * @param start desired starting point
-     * @param goal desired ending point
+     * @param start starting point
+     * @param goal ending point
      */
     public SearchProblem(String start, String goal) {
         startState = new City(start);
         goalState = new City(goal);
     }
 
+    /**
+     * Second constructor use to validate the repo
+     * @param startState starting point
+     * @param goalState ending point
+     */
     public SearchProblem(City startState, City goalState) {
         this.startState = startState;
         this.goalState = goalState;
@@ -48,7 +53,7 @@ public class SearchProblem {
     }
 
     /**
-     * Method test if the current city is equals
+     * Method comparing if the current city is equals
      * to the goal city
      *
      * @param st current city
@@ -222,40 +227,43 @@ public class SearchProblem {
 //            if (sc != null) sc.close();
 //        }
 
-        if (st.city.equals("Vidin")) heuristic = 4073;
-
-        else if (st.city.equals("Montana")) heuristic = 3590;
-
-        else if (st.city.equals("Vratsa"))	heuristic = 3281;
-
-        else if (st.city.equals("Pleven")) heuristic = 2553;
-
-        else if (st.city.equals("VelikoTarnovo")) heuristic = 1634;
-
-        else if (st.city.equals("Ruse")) heuristic = 1914;
-
-        else if (st.city.equals("Dobrich")) heuristic = 1224;
-
-        else if (st.city.equals("Varna")) heuristic = 87;
-
-        else if (st.city.equals("Sofia")) heuristic = 3396;
-
-        else if (st.city.equals("Pernik")) heuristic = 3626;
-
-        else if (st.city.equals("Bansko")) heuristic = 3359;
-
-        else if (st.city.equals("Pazardzhik")) heuristic = 2594;
-
-        else if (st.city.equals("Plovdiv")) heuristic = 2271;
-
-        else if (st.city.equals("Haskovo")) heuristic = 1694;
-
-        else if (st.city.equals("Shumen")) heuristic = 954;
-
-        else if (st.city.equals("Sliven")) heuristic = 953;
-
-        else if (st.city.equals("Burgas")) heuristic = 0;
-
+        if (st.city.equals("Vidin")) {
+            heuristic = 4073;
+        } else if (st.city.equals("Montana")) {
+            heuristic = 3590;
+        } else if (st.city.equals("Vratsa")) {
+            heuristic = 3281;
+        } else if (st.city.equals("Pleven")) {
+            heuristic = 2553;
+        } else if (st.city.equals("VelikoTarnovo")) {
+            heuristic = 1634;
+        } else if (st.city.equals("Ruse")) {
+            heuristic = 1914;
+        } else if (st.city.equals("Dobrich")) {
+            heuristic = 1224;
+        } else if (st.city.equals("Varna")) {
+            heuristic = 87;
+        } else if (st.city.equals("Sofia")) {
+            heuristic = 3396;
+        } else if (st.city.equals("Pernik")) {
+            heuristic = 3626;
+        } else if (st.city.equals("Bansko")) {
+            heuristic = 3359;
+        } else if (st.city.equals("Blagoevgrad")) {
+            heuristic = 3634;
+        } else if (st.city.equals("Pazardzhik")) {
+            heuristic = 2594;
+        } else if (st.city.equals("Plovdiv")) {
+            heuristic = 2271;
+        } else if (st.city.equals("Haskovo")) {
+            heuristic = 1694;
+        } else if (st.city.equals("Shumen")) {
+            heuristic = 954;
+        } else if (st.city.equals("Sliven")) {
+            heuristic = 953;
+        } else if (st.city.equals("Burgas")) {
+            heuristic = 0;
+        }
         return heuristic;
     }
 }
