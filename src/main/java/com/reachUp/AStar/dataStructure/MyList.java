@@ -1,31 +1,96 @@
 package com.reachUp.AStar.dataStructure;
 
+/**
+ * This interface implementation, we are learned during
+ * the course in the academy.
+ * @param <E> generics type
+ */
 public interface MyList<E> extends Iterable<E> {
 
-    public void add(E element); //add at the end
+    /**
+     * Method add element at the end
+     * @param element generic type
+     */
+    public void add(E element);
 
-    public void add(int index, E element); //add at the index
+    /**
+     * Method add element at the given index
+     * @param index
+     * @param element generic type
+     */
+    public void add(int index, E element);
 
-    public void clear(); //clear list
+    /**
+     * Method clear list
+     */
+    public void clear();
 
-    public boolean contains(E element); //return true if the element exists
+    /**
+     * Method check if the given element exists
+     * @param element generic type
+     * @return true if the element exists
+     */
+    public boolean contains(E element);
 
-    public E get(int index); //return element i=on the index if he exists
+    /**
+     * Methods if element exists on the given index
+     * @param index position in the list
+     * @return element i = on the index
+     */
+    public E get(int index);
 
-    public int IndexOf(E element); //return index of first matching el in the list
+    /**
+     * Method searching element by index
+     * @param element generic type
+     * @return index of first matching el in the list
+     */
+    public int IndexOf(E element);
 
-    public boolean isEmpty(); //
+    /**
+     * Method check for empty list
+     * @return true if is empty
+     */
+    public boolean isEmpty();
 
-    public int lastIndexOf(E element);//last matching element, return index
+    /**
+     * Method shows the last matching element
+     * @param element generic type
+     * @return index
+     */
+    public int lastIndexOf(E element);
 
-    public int indexOf(E element); //match element and return
+    /**
+     * Method shows matching element
+     * @param element generic type
+     * @return index
+     */
+    public int indexOf(E element);
 
-    public boolean remove(E element); //remove first element, shift element to left, return true if the element is remove
+    /**
+     * Method remove first el, shift el to left
+     * @param element generic type
+     * @return true if the element has removed
+     */
+    public boolean remove(E element);
 
-    public E remove (int index); //remove at the position, shift the el to left, return the removed element
+    /**
+     * Method remove at the position, shift the el to left
+     * @param index generic type
+     * @return the removed element
+     */
+    public E remove (int index);
 
-    public E set(int index, E element); //replace the element at the index with speciefed el and return the new set
+    /**
+     * Method replace the el at the index with specified el
+     * @param index
+     * @param element generic type
+     * @return the new set
+     */
+    public E set(int index, E element);
 
-    public int size(); //return length
-
+    /**
+     * Method specified the size of list
+     * @return length
+     */
+    public int size();
 }
