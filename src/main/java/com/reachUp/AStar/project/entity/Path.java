@@ -90,6 +90,23 @@ public class Path {
         this.cost = c;
     }
 
+    /**
+     * Constructor for Junit
+     * @param from
+     * @param to
+     * @param cost
+     */
+    public Path(
+            City from,
+            City to,
+            int cost
+    ) {
+        this.from = String.valueOf(from);
+        this.to = String.valueOf(to);
+        this.cost = cost;
+    }
+
+
     @Override
     public String toString() {
         return (child.toString() + " " + cost);

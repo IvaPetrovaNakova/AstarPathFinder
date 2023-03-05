@@ -1,20 +1,21 @@
 package com.reachUp.AStar.project;
 
 import com.reachUp.AStar.dataStructure.MyArrayList;
+import com.reachUp.AStar.dataStructure.MyList;
 import com.reachUp.AStar.project.entity.Path;
 import com.reachUp.AStar.project.entity.City;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class SearchProblem, the start and end points are method arguments
- * with which we search for a path
- * Reads from two data sources, br1.txt contains the information
- * about the children in the map /all existing route between the
- * cities as a connection/
- * The second text file contains information value for the heuristic
+ * Class SearchProblem, initialize the start and end goal
+ * states as a method arguments for a path searching
+ * Reads from two data sources, br1.txt contains the c cost
+ * existing route between the cities as a connection
+ * The second part contains the h cost for the heuristic
  * the straight line destination between all cities in the map
  * Straight-line heuristic function has been employed for fast
  * convergence in A* search.
@@ -265,5 +266,10 @@ public class SearchProblem {
             heuristic = 0;
         }
         return heuristic;
+    }
+
+    public void addPath(Path path) {
+        MyList<Path> addedPaths = new MyArrayList<>();
+        addedPaths.add(1, path);
     }
 }
