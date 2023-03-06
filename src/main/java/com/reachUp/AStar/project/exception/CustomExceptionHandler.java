@@ -1,4 +1,4 @@
-package com.reachUp.AStar.project.view;
+package com.reachUp.AStar.project.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

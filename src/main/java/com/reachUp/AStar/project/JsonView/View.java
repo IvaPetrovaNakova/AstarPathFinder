@@ -1,4 +1,4 @@
-package com.reachUp.AStar.project.view;
+package com.reachUp.AStar.project.JsonView;
 
 /**
  * Json View hiding sensitive information

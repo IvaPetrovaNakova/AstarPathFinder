@@ -1,9 +1,7 @@
 package com.reachUp.AStar.project.controller.endpoint;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.reachUp.AStar.project.entity.City;
 import com.reachUp.AStar.project.service.ShortestPathService;
-import com.reachUp.AStar.project.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

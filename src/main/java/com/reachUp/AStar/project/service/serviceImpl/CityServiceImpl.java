@@ -29,10 +29,9 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City deleteCity(Long cityId) throws Exception {
-        City deleteCity = null;
+    public void deleteCity(Long cityId) throws Exception {
         try {
-            deleteCity = cityRepository.findById(cityId).orElse(null);
+            City deleteCity = cityRepository.findById(cityId).orElse(null);
             if (deleteCity == null) {
                 throw new Exception("There is no city in the map");
             } else {
@@ -41,6 +40,5 @@ public class CityServiceImpl implements CityService {
         } catch (Exception ex) {
             throw ex;
         }
-        return deleteCity;
     }
 }

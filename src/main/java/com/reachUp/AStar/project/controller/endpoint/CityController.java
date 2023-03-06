@@ -1,6 +1,8 @@
 package com.reachUp.AStar.project.controller.endpoint;
 
 import com.reachUp.AStar.project.entity.City;
+import com.reachUp.AStar.project.exception.HttpRequestException;
+import com.reachUp.AStar.project.exception.HttpResponseException;
 import com.reachUp.AStar.project.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+/**
+ * Each method catches specific custom exceptions
+ * thrown by the CityService layer,
+ * and returns an appropriate ResponseEntity
+ * with an appropriate HTTP status code based
+ * on the type of exception. I've also modified
+ * the return type of the deleteCity method to
+ * ResponseEntity<Void> to indicate that it
+ * returns an empty response body.
+ */
 
 @RestController
 @RequestMapping("/cities")
@@ -23,44 +36,50 @@ public class CityController {
 
     @GetMapping()
     public ResponseEntity<List<City>> getAllCities() {
-        List<City> cities = null;
         try {
-            cities = cityService.getAllCities();
-        } catch (Exception ex){
-            ex.getMessage();
+            List<City> cities = cityService.getAllCities();
+            return new ResponseEntity<List<City>>(cities, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<List<City>>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<List<City>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<List<City>>(cities, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<City> getCityById(@PathVariable("id") Long cityId) {
-        City cities = null;
         try {
-            cities = cityService.getCitiesById(cityId);
-        } catch (Exception ex){
-            ex.getMessage();
+            City city = cityService.getCitiesById(cityId);
+            return new ResponseEntity<City>(city, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<City>(HttpStatus.NOT_FOUND);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<City>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<City> addOrUpdate(@RequestBody @Valid City city) { //@Valid throw an exception
-        City cities = null;
         try {
-            cities = cityService.addOrUpdateCities(city);
-        } catch (Exception ex){
-            ex.getMessage();
+            City createdCity = cityService.addOrUpdateCities(city);
+            return new ResponseEntity<City>(createdCity, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<City>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<City>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
     @DeleteMapping ("/{id}")
-    public ResponseEntity<City> delete(@PathVariable("id") Long cityId) {
-        City cities = null;
+    public ResponseEntity<Void> deleteCity(@PathVariable("id") Long cityId) {
         try {
-            cities = cityService.deleteCity(cityId);
-        } catch (Exception ex){
-            ex.getMessage();
+            cityService.deleteCity(cityId);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
 }

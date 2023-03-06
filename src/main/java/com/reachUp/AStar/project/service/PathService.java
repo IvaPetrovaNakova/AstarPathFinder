@@ -10,8 +10,8 @@ public interface PathService {
 public List<Path> getAllPaths();
 public Path getPathsById(Long pathId);
 public Path addOrUpdatePath(Path path);
-public Path deletePath(Long pathId) throws Exception;
+public void deletePath(Long pathId) throws Exception;
 
 //this method is calling from crud repository using query annotation
-    public List<Path> getChildren(String cityFrom);
+    public List<Path> getConnection(String cityFrom);
 }

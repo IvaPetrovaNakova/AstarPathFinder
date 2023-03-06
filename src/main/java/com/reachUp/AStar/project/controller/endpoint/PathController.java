@@ -2,8 +2,10 @@ package com.reachUp.AStar.project.controller.endpoint;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.reachUp.AStar.project.entity.Path;
+import com.reachUp.AStar.project.exception.HttpRequestException;
+import com.reachUp.AStar.project.exception.HttpResponseException;
 import com.reachUp.AStar.project.service.PathService;
-import com.reachUp.AStar.project.view.View;
+import com.reachUp.AStar.project.JsonView.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,57 +26,64 @@ public class PathController {
 
     @GetMapping()
     public ResponseEntity<List<Path>> getAllPaths() {
-        List<Path> paths = null;
         try {
-            paths = pathService.getAllPaths();
-        } catch (Exception ex){
-            ex.getMessage();
+            List<Path> paths = pathService.getAllPaths();
+            return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<List<Path>>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<List<Path>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Path> getPathById(@PathVariable("id") Long pathId) {
-        Path paths = null;
         try {
-            paths = pathService.getPathsById(pathId);
-        } catch (Exception ex){
-            ex.getMessage();
+            Path path = pathService.getPathsById(pathId);
+            return new ResponseEntity<Path>(path, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<Path>(HttpStatus.NOT_FOUND);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<Path>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<Path> addOrUpdate(@RequestBody @Valid Path path) {
-        Path paths = null;
         try {
-            paths = pathService.addOrUpdatePath(path);
-        } catch (Exception ex){
-            ex.getMessage();
+            Path createdPath = pathService.addOrUpdatePath(path);
+            return new ResponseEntity<Path>(createdPath, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<Path>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<Path>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
-    @DeleteMapping ("/{id}")
-    public ResponseEntity<Path> delete(@PathVariable("id") Long pathId) {
-        Path paths = null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePath(@PathVariable("id") Long pathId) {
         try {
-            paths = pathService.deletePath(pathId);
-        } catch (Exception ex){
-            ex.getMessage();
+            pathService.deletePath(pathId);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
     @GetMapping("/getDirectPaths/{city_from}")
     @JsonView(View.Base.class)
-    public ResponseEntity<List<Path>> getChildren(@PathVariable("city_from") String cityFrom) {
-        List<Path> paths = null;
+    public ResponseEntity<List<Path>> getDirectedPaths(@PathVariable("city_from") String cityFrom) {
         try {
-            paths = pathService.getChildren(cityFrom);
-        } catch (Exception ex){
-            ex.getMessage();
+            List<Path> directedPaths = pathService.getConnection(cityFrom);
+            return new ResponseEntity<List<Path>>(directedPaths, HttpStatus.OK);
+        } catch (HttpRequestException ex) {
+            return new ResponseEntity<List<Path>>(HttpStatus.NOT_FOUND);
+        } catch (HttpResponseException ex) {
+            return new ResponseEntity<List<Path>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
     }
 }

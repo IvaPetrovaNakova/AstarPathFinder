@@ -34,7 +34,7 @@ public class PathServiceImpl implements PathService {
     }
 
     @Override
-    public Path deletePath(Long pathId) throws Exception {
+    public void deletePath(Long pathId) throws Exception {
         Path deletePath = null;
         try{
             deletePath = pathRepository.findById(pathId).orElse(null);
@@ -46,11 +46,10 @@ public class PathServiceImpl implements PathService {
         } catch (Exception ex) {
             throw ex;
         }
-        return deletePath;
     }
 
     @Override
-    public List<Path> getChildren(String cityFrom) {
+    public List<Path> getConnection(String cityFrom) {
         return pathRepository.getDirectPaths(cityFrom);
     }
 }

@@ -11,5 +11,5 @@ public interface CityService {
     public List<City> getAllCities();
     public City getCitiesById(Long cityId);
     public City addOrUpdateCities(City city); //json type
-    public City deleteCity(Long cityId) throws Exception;
+    public void deleteCity(Long cityId) throws Exception;
 }

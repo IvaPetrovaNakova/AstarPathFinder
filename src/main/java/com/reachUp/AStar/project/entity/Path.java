@@ -1,7 +1,7 @@
 package com.reachUp.AStar.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.reachUp.AStar.project.view.View;
+import com.reachUp.AStar.project.JsonView.View;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
