@@ -52,11 +52,12 @@ public class Path {
     @Min(value = 1, message = "The direct distance cost must not be blank")
     @JsonView(View.Base.class)
     public Integer cost;
-    @ManyToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "city_id")
+    @Transient
+//    @ManyToOne(
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    @JoinColumn(name = "city_id")
     public City child;
 
     /**

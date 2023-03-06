@@ -22,7 +22,7 @@ public class PathController {
         this.pathService = pathService;
     }
 
-    @GetMapping("/allPaths")
+    @GetMapping()
     public ResponseEntity<List<Path>> getAllPaths() {
         List<Path> paths = null;
         try {
@@ -33,7 +33,7 @@ public class PathController {
         return new ResponseEntity<List<Path>>(paths, HttpStatus.OK);
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Path> getPathById(@PathVariable("id") Long pathId) {
         Path paths = null;
         try {
@@ -44,7 +44,7 @@ public class PathController {
         return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
-    @PostMapping("/addOrUpdate")
+    @PostMapping()
     public ResponseEntity<Path> addOrUpdate(@RequestBody @Valid Path path) {
         Path paths = null;
         try {
@@ -55,7 +55,7 @@ public class PathController {
         return new ResponseEntity<Path> (paths, HttpStatus.OK);
     }
 
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping ("/{id}")
     public ResponseEntity<Path> delete(@PathVariable("id") Long pathId) {
         Path paths = null;
         try {

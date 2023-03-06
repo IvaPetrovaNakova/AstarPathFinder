@@ -21,7 +21,7 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping("/allCities")
+    @GetMapping()
     public ResponseEntity<List<City>> getAllCities() {
         List<City> cities = null;
         try {
@@ -32,7 +32,7 @@ public class CityController {
         return new ResponseEntity<List<City>>(cities, HttpStatus.OK);
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<City> getCityById(@PathVariable("id") Long cityId) {
         City cities = null;
         try {
@@ -43,7 +43,7 @@ public class CityController {
         return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
 
-    @PostMapping("/addOrUpdate")
+    @PostMapping()
     public ResponseEntity<City> addOrUpdate(@RequestBody @Valid City city) { //@Valid throw an exception
         City cities = null;
         try {
@@ -53,7 +53,7 @@ public class CityController {
         }
         return new ResponseEntity<City> (cities, HttpStatus.OK);
     }
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping ("/{id}")
     public ResponseEntity<City> delete(@PathVariable("id") Long cityId) {
         City cities = null;
         try {

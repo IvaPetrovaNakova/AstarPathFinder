@@ -33,11 +33,12 @@ public class City {
     @Length(min = 3, max = 512, message = "City name must have 3-512 characters")
     public String city;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "path_id")
+//    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    @JoinColumn(name = "path_id")
+    @Transient
     private MyList<Path> paths = new MyArrayList<>();
 
     /**
