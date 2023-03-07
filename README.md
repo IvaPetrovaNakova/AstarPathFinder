@@ -1,3 +1,5 @@
+This is my graduation project for Amadeus Java Academy
+
 Path Planning project solving problem to find the shortes way between two cieties in Bulgaria.
 
 CHECKOUT BRANCH FEATURE-A!!!!!
